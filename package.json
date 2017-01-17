@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "gray-matter": "^2.1.0",
     "gulp": "^3.9.1",
-    "gulp-markdown": "^1.2.0"
+    "gulp-markdown": "^1.2.0",
+    "gulp-pug": "^3.2.0"
   },
   "scripts": {
     "gulp": "gulp"
