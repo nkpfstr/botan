@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-markdown": "^1.2.0"
+  },
+  "scripts": {
+    "gulp": "gulp"
+  }
+}

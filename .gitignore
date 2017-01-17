@@ -46,6 +46,9 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
+# Production files
+docs
+
 # =========================
 # Operating System Files
 # =========================
