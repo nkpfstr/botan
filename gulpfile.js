@@ -4,6 +4,7 @@
 const gulp = require('gulp')
 const fs = require('fs-extra')
 const yaml = require('js-yaml')
+const sync = require('browser-sync').create()
 const metalsmith = require('metalsmith')
 const collections = require('metalsmith-collections')
 const markdown = require('metalsmith-markdown')
@@ -50,8 +51,25 @@ function content (done) {
   done()
 }
 
+// Live preview and hot-reload
+function preview () {
+  // Initialize BrowserSync
+  sync.init({
+    server: {
+      baseDir: './docs'
+    }
+  })
+
+  // Rebuild production files when source files change
+  gulp.watch(['_content/**/*', '_templates/**/*'], content)
+
+  // Reload browsers when productions files change
+  gulp.watch('docs/**/*').on('change', sync.reload)
+  gulp.watch('docs/**/*').on('add', sync.reload)
+}
+
 // Define build process
-let botan = gulp.series(content)
+let botan = gulp.series(content, preview)
 
 // Bingo, bingo, you win the prize!
 gulp.task('default', botan)
