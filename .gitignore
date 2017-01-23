@@ -49,6 +49,10 @@ jspm_packages
 # Production files
 docs
 
+# Unique source content
+_content/*
+!_content/index.md
+
 # =========================
 # Operating System Files
 # =========================
