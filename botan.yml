@@ -1,0 +1,5 @@
+# Botan Configuration File
+site:
+  title: 'Johnny Doughnuts'
+  description: 'A really sweet guy'
+  url: 'http://jdoughnuts.design'
