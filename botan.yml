@@ -15,3 +15,5 @@ templates:
   default: 'default.hbs'
   directory: '_templates'
   partials: '_templates/partials'
+github:
+  cname: true
