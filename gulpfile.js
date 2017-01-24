@@ -64,7 +64,12 @@ function content (done) {
       }
     })
 
-  // Signal async completion
+  if (data.github.cname) {
+    cname(data.site.url, data.content.destination)
+  }
+
+  done()
+}
   done()
 }
 
