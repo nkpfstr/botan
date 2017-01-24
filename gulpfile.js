@@ -22,9 +22,8 @@ const data = yaml.safeLoad(fs.readFileSync('./botan.yml', 'utf-8'))
 function content (done) {
   metalsmith(__dirname)
     .metadata(data) // Add site config to metadata
-    .source('_content') // Process files in this folder
-    .destination('docs') // Output files in this folder
-    .clean(true) // Empty destination folder before building files
+    .source(data.content.source) // Process files in this folder
+    .destination(data.content.destination) // Output files in this folder
     .use(collections({ // Group related content for easy access later
       blog: 'blog/*.md',
       projects: 'projects/*.md'
@@ -36,10 +35,10 @@ function content (done) {
       relative: false
     }))
     .use(layouts({ // Wrap content with Handlebars templates
-      engine: 'handlebars',
-      default: 'default.hbs',
-      directory: './_templates',
-      partials: './_templates/partials'
+      engine: data.templates.engine,
+      default: data.templates.default,
+      directory: data.templates.directory,
+      partials: data.templates.partials
     }))
     .use(sitemap(data.site.url)) // Generate a sitemap
     .use(rss({ // Generate RSS feeds for collections
@@ -66,12 +65,12 @@ function preview () {
     }
   })
 
-  // Rebuild production files when source files change
-  gulp.watch(['_content/**/*', '_templates/**/*'], content)
+  // Watch content and templates
+  gulp.watch([`${data.content.source}/**/*`, `${data.templates.directory}/**/*`], content)
 
-  // Reload browsers when productions files change
-  gulp.watch('docs/**/*').on('change', sync.reload)
-  gulp.watch('docs/**/*').on('add', sync.reload)
+
+  // Reload live preview
+  gulp.watch(`${data.content.destination}/**/*`).on('change', sync.reload)
 }
 
 // Define build process

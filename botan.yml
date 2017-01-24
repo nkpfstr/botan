@@ -3,3 +3,15 @@ site:
   title: 'Johnny Doughnuts'
   description: 'A really sweet guy'
   url: 'http://jdoughnuts.design'
+assets:
+  sass:
+    source: '_assets/sass/**/*.scss'
+    destination: 'docs/assets/css'
+content:
+  source: '_content'
+  destination: 'docs'
+templates:
+  engine: 'handlebars'
+  default: 'default.hbs'
+  directory: '_templates'
+  partials: '_templates/partials'
