@@ -50,8 +50,10 @@ jspm_packages
 docs
 
 # Unique source content
+_assets
 _content/*
 !_content/index.md
+_templates
 
 # =========================
 # Operating System Files
