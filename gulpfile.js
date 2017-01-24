@@ -35,6 +35,7 @@ function content (done) {
     .metadata(data) // Add site config to metadata
     .source(data.content.source) // Process files in this folder
     .destination(data.content.destination) // Output files in this folder
+    .clean(false) // Don't clean the directory on every build
     .use(collections({ // Group related content for easy access later
       blog: 'blog/*.md',
       projects: 'projects/*.md'
