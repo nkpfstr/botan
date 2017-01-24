@@ -2,6 +2,7 @@
 
 // Import dependencies
 const gulp = require('gulp')
+const del = require('del')
 const fs = require('fs-extra')
 const yaml = require('js-yaml')
 const sync = require('browser-sync').create()
@@ -54,6 +55,11 @@ function content (done) {
 
   // Signal async completion
   done()
+}
+
+// Clean production assets before building new ones
+function clean () {
+  return del(`${data.content.desintation}/**`)
 }
 
 // Live preview and hot-reload
