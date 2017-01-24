@@ -3,6 +3,7 @@
 // Import dependencies
 const gulp = require('gulp')
 const del = require('del')
+const hbs = require('handlebars')
 const fs = require('fs-extra')
 const yaml = require('js-yaml')
 const sync = require('browser-sync').create()
@@ -18,6 +19,15 @@ const cname = require('./lib/cname')
 
 // Import configuration file
 const data = yaml.safeLoad(fs.readFileSync('./botan.yml', 'utf-8'))
+
+// Register custom helpers for Handlebars
+hbs.registerHelper('asset', path => {
+  // Resolve path from root directory to asset
+  let output = `../../assets/${path}`
+
+  // Return resolved path
+  return new hbs.SafeString(output)
+})
 
 // Build site pages and content
 function content (done) {
