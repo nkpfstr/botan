@@ -2,6 +2,7 @@
 
 // Import dependencies
 const gulp = require('gulp')
+const sass = require('gulp-sass')
 const del = require('del')
 const hbs = require('handlebars')
 const fs = require('fs-extra')
@@ -70,6 +71,15 @@ function content (done) {
 
   done()
 }
+
+// Build site assets
+function assets (done) {
+  gulp.src(data.assets.sass.source)
+    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(gulp.dest(data.assets.sass.destination))
+
+  log.success('Site assets compiled successfully')
+
   done()
 }
 
@@ -90,13 +100,15 @@ function preview () {
   // Watch content and templates
   gulp.watch([`${data.content.source}/**/*`, `${data.templates.directory}/**/*`], content)
 
+  // Watch assets
+  gulp.watch(`${data.assets.sass.source}`, assets)
 
   // Reload live preview
   gulp.watch(`${data.content.destination}/**/*`).on('change', sync.reload)
 }
 
 // Define build process
-let botan = gulp.series(content, preview)
+let botan = gulp.series(clean, assets, content, preview)
 
 // Bingo, bingo, you win the prize!
 gulp.task('default', botan)
