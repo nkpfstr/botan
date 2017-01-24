@@ -12,7 +12,8 @@ const permalinks = require('metalsmith-permalinks')
 const layouts = require('metalsmith-layouts')
 const sitemap = require('metalsmith-mapsite')
 const rss = require('metalsmith-feed')
-const log = require('./util/log')
+const log = require('./lib/log')
+const cname = require('./lib/cname')
 
 // Import configuration file
 const data = yaml.safeLoad(fs.readFileSync('./botan.yml', 'utf-8'))
@@ -44,9 +45,9 @@ function content (done) {
     .use(rss({ // Generate RSS feeds for collections
       collection: 'blog'
     }))
-    .build(err => {
-      if (err) {
-        throw err
+    .build(error => {
+      if (error) {
+        log.error(`Whoops! Something broke: ${error}`)
       } else {
         log.success('Site pages and content compiled successfully')
       }
