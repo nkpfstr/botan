@@ -2,4 +2,4 @@
 
 > Build static sites optimized for Github Pages
 
-This is a heavy work in progress and is **not ready for widespread production use**.
+I am no longer using or updating this project. Feel free to use it, just be aware that it was left in a half-finished state and is not probably not suitable for production use.
